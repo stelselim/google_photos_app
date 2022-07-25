@@ -1,4 +1,4 @@
-package com.photoapp.newarchitecture;
+package com.stel.photoapp.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -19,9 +19,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.fabric.ReactNativeConfig;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.photoapp.BuildConfig;
-import com.photoapp.newarchitecture.components.MainComponentsRegistry;
-import com.photoapp.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import com.stel.photoapp.BuildConfig;
+import com.stel.photoapp.newarchitecture.components.MainComponentsRegistry;
+import com.stel.photoapp.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 

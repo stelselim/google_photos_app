@@ -21,6 +21,7 @@ DerivedData
 *.ipa
 *.xcuserstate
 ios/.xcode.env.local
+GoogleService-Info.plist
 
 # Android/IntelliJ
 #
@@ -30,12 +31,15 @@ build/
 local.properties
 *.iml
 *.hprof
+google-services.json.json
 
 # node.js
 #
 node_modules/
 npm-debug.log
 yarn-error.log
+key.properties
+upload-keystore.jks
 
 # BUCK
 buck-out/
