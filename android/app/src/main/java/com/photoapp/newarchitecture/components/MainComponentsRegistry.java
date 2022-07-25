@@ -1,4 +1,4 @@
-package com.photoapp.newarchitecture.components;
+package com.stel.photoapp.newarchitecture.components;
 
 import com.facebook.jni.HybridData;
 import com.facebook.proguard.annotations.DoNotStrip;
