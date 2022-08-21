@@ -10,6 +10,8 @@ import {
 import {User as GoogleUser} from '@react-native-google-signin/google-signin';
 import {authentication} from '../../../services/googleOauth';
 import {SignInButton} from '../../Components/SignInButton';
+import {Login} from '../Login';
+import {Photos} from '../Photos';
 
 const Home = () => {
   const [user, setUser] = useState<GoogleUser | null>(null);
@@ -33,6 +35,7 @@ const Home = () => {
     return (
       <SafeAreaView>
         <View style={{margin: 25}}>
+          <Login />
           <SignInButton
             onSuccess={user => setUser(user)}
             onFail={error => {
@@ -46,16 +49,18 @@ const Home = () => {
 
   return (
     <SafeAreaView>
-      <ScrollView>
-        <StatusBar barStyle="dark-content" />
-        <View style={{margin: 25}}>
-          <Text style={{backgroundColor: 'aqua', margin: 25}}>
-            User Email: {user?.user.email + '\n'}
-            Name: {user?.user.name + '\n'}
-            Surname: {user?.user.familyName + '\n'}
-          </Text>
-        </View>
+      <StatusBar barStyle="dark-content" />
+      <View style={{margin: 25}}>
+        <Text style={{backgroundColor: 'aqua', margin: 25}}>
+          User Email: {user?.user.email + '\n'}
+          Name: {user?.user.name + '\n'}
+          Surname: {user?.user.familyName + '\n'}
+        </Text>
+      </View>
 
+      <Photos />
+
+      <View style={{marginTop: 120}}>
         <Button
           title="Log Out"
           onPress={() => {
@@ -63,7 +68,7 @@ const Home = () => {
             setUser(null);
           }}
         />
-      </ScrollView>
+      </View>
     </SafeAreaView>
   );
 };

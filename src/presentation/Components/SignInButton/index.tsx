@@ -4,6 +4,7 @@ import {
   User,
 } from '@react-native-google-signin/google-signin';
 import {authentication} from './../../../services/googleOauth';
+import {StyleSheet, View} from 'react-native';
 
 interface Props {
   onSuccess(user: User): void;
@@ -19,7 +20,17 @@ const SignInButton = ({onSuccess, onFail}: Props) => {
     onFail(res);
   };
 
-  return <GoogleSigninButton onPress={onPress} />;
+  return (
+    <View style={styles.container}>
+      <GoogleSigninButton onPress={onPress} />
+    </View>
+  );
 };
 
 export {SignInButton};
+
+const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+  },
+});
