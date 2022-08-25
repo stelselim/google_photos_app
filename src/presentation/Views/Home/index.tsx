@@ -21,13 +21,9 @@ const Home = () => {
   }, []);
 
   const checkInitialUser = async () => {
-    try {
-      const user = await authentication.checkSignIn();
-      if (user) {
-        setUser(user);
-      }
-    } catch (error) {
-      console.log('Error in authentication.checkSignIn');
+    const user = await authentication.checkSignIn();
+    if (user) {
+      setUser(user);
     }
   };
 
@@ -48,28 +44,34 @@ const Home = () => {
   }
 
   return (
-    <SafeAreaView>
-      <StatusBar barStyle="dark-content" />
-      <View style={{margin: 25}}>
-        <Text style={{backgroundColor: 'aqua', margin: 25}}>
-          User Email: {user?.user.email + '\n'}
-          Name: {user?.user.name + '\n'}
-          Surname: {user?.user.familyName + '\n'}
-        </Text>
-      </View>
+    <View>
+      <SafeAreaView>
+        <StatusBar barStyle="dark-content" />
+        <View
+          style={{
+            margin: 25,
+            flexDirection: 'column',
+          }}>
+          <Text style={{backgroundColor: 'aqua', margin: 25}}>
+            User Email: {user?.user.email + '\n'}
+            Name: {user?.user.name + '\n'}
+            Surname: {user?.user.familyName + '\n'}
+          </Text>
+        </View>
 
-      <Photos />
+        <Photos />
 
-      <View style={{marginTop: 120}}>
-        <Button
-          title="Log Out"
-          onPress={() => {
-            authentication.signOut();
-            setUser(null);
-          }}
-        />
-      </View>
-    </SafeAreaView>
+        <View style={{marginTop: 120}}>
+          <Button
+            title="Log Out"
+            onPress={() => {
+              authentication.signOut();
+              setUser(null);
+            }}
+          />
+        </View>
+      </SafeAreaView>
+    </View>
   );
 };
 
