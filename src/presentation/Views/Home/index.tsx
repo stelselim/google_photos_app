@@ -10,6 +10,8 @@ import {
 import {User as GoogleUser} from '@react-native-google-signin/google-signin';
 import {authentication} from '../../../services/googleOauth';
 import {SignInButton} from '../../Components/SignInButton';
+import {Login} from '../Login';
+import {Photos} from '../Photos';
 
 const Home = () => {
   const [user, setUser] = useState<GoogleUser | null>(null);
@@ -19,13 +21,9 @@ const Home = () => {
   }, []);
 
   const checkInitialUser = async () => {
-    try {
-      const user = await authentication.checkSignIn();
-      if (user) {
-        setUser(user);
-      }
-    } catch (error) {
-      console.log('Error in authentication.checkSignIn');
+    const user = await authentication.checkSignIn();
+    if (user) {
+      setUser(user);
     }
   };
 
@@ -33,6 +31,7 @@ const Home = () => {
     return (
       <SafeAreaView>
         <View style={{margin: 25}}>
+          <Login />
           <SignInButton
             onSuccess={user => setUser(user)}
             onFail={error => {
@@ -45,26 +44,23 @@ const Home = () => {
   }
 
   return (
-    <SafeAreaView>
-      <ScrollView>
+    <View>
+      <SafeAreaView>
         <StatusBar barStyle="dark-content" />
-        <View style={{margin: 25}}>
-          <Text style={{backgroundColor: 'aqua', margin: 25}}>
-            User Email: {user?.user.email + '\n'}
-            Name: {user?.user.name + '\n'}
-            Surname: {user?.user.familyName + '\n'}
-          </Text>
-        </View>
 
-        <Button
-          title="Log Out"
-          onPress={() => {
-            authentication.signOut();
-            setUser(null);
-          }}
-        />
-      </ScrollView>
-    </SafeAreaView>
+        <Photos />
+
+        <View style={{marginTop: 120}}>
+          <Button
+            title="Log Out"
+            onPress={() => {
+              authentication.signOut();
+              setUser(null);
+            }}
+          />
+        </View>
+      </SafeAreaView>
+    </View>
   );
 };
 

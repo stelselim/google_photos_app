@@ -8,15 +8,16 @@ import {
 } from 'react-native';
 
 const Splash = () => {
-  const dimensions = useWindowDimensions();
-  const topSpace = dimensions.height * 0.25;
+  const {height} = useWindowDimensions();
+  const topSpace = height * 0.25;
+  const appIconPath = '../../../../assets/images/icon.png';
 
   return (
     <View style={styles.container}>
       <SafeAreaView>
         <Image
           style={{...styles.image, top: topSpace}}
-          source={require('../../../../assets/images/icon.png')}
+          source={require(appIconPath)}
         />
       </SafeAreaView>
     </View>

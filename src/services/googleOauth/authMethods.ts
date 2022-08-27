@@ -5,11 +5,12 @@ import {
 } from '@react-native-google-signin/google-signin';
 
 const checkSignIn = async (): Promise<User | null> => {
-  const signedIn = await GoogleSignin.isSignedIn();
-  if (signedIn) {
-    return await GoogleSignin.getCurrentUser();
+  try {
+    const user = await GoogleSignin.signInSilently();
+    return user;
+  } catch (error) {
+    return null;
   }
-  return null;
 };
 
 interface ISignInTypes {
