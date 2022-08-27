@@ -47,17 +47,6 @@ const Home = () => {
     <View>
       <SafeAreaView>
         <StatusBar barStyle="dark-content" />
-        <View
-          style={{
-            margin: 25,
-            flexDirection: 'column',
-          }}>
-          <Text style={{backgroundColor: 'aqua', margin: 25}}>
-            User Email: {user?.user.email + '\n'}
-            Name: {user?.user.name + '\n'}
-            Surname: {user?.user.familyName + '\n'}
-          </Text>
-        </View>
 
         <Photos />
 
