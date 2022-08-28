@@ -22,7 +22,6 @@
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
 	<array>
-
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
@@ -68,6 +67,13 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>AntDesign.ttf</string>
+		<string>FontAwesome.ttf</string>
+		<string>Foundation.ttf</string>
+		<string>MaterialIcons.ttf</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
