@@ -1,29 +1,16 @@
-import React, {useEffect, useState} from 'react';
-import AppNav from './src/presentation/Core/AppNav';
-import {Splash} from './src/presentation/Views/Splash';
-import {initiliazeServices} from './src/services';
+import React from 'react';
+import {AuthProvider} from './src/hooks/useAuth';
+import {AppServicesProvider} from './src/hooks/useServices';
+import AppNav from './src/presentation/core/AppNav';
 
 const App = () => {
-  const [loading, setLoading] = useState(true);
-
-  const init = async () => {
-    try {
-      initiliazeServices();
-    } catch (error) {
-      console.log('Error in App-init: ' + error);
-    }
-    setLoading(false);
-  };
-
-  useEffect(() => {
-    init();
-  }, []);
-
-  if (loading) {
-    return <Splash />;
-  }
-
-  return <AppNav />;
+  return (
+    <AppServicesProvider>
+      <AuthProvider>
+        <AppNav />
+      </AuthProvider>
+    </AppServicesProvider>
+  );
 };
 
 export default App;

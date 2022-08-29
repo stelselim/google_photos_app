@@ -1,20 +1,12 @@
 import React from 'react';
-import {SafeAreaView, Text, View} from 'react-native';
-import {SignInButton} from '../../Components/SignInButton';
-import {User as GoogleUser} from '@react-native-google-signin/google-signin';
+import {SafeAreaView, View} from 'react-native';
+import {SignInButton} from '../../components/SignInButton';
 
 const Login = () => {
   return (
     <SafeAreaView>
       <View style={{margin: 25}}>
-        <SignInButton
-          onSuccess={user => {
-            // setUser(user);
-          }}
-          onFail={error => {
-            console.log('Error: ' + error);
-          }}
-        />
+        <SignInButton />
       </View>
     </SafeAreaView>
   );
