@@ -5,6 +5,7 @@ import {
   TabParamList,
   TLoginStackParamList,
 } from '../../../../@types/navigation.types';
+import i18n from '../../../../utils/translations_utility';
 import Home from '../../../views/Home';
 import {Login} from '../../../views/Login';
 import {
@@ -13,6 +14,7 @@ import {
   SearchIcon,
   SharedAlbumsIcon,
 } from './bottomTabBarIcons';
+
 const LoginStack = createNativeStackNavigator<TLoginStackParamList>();
 const HomeTab = createBottomTabNavigator<TabParamList>();
 
@@ -23,7 +25,7 @@ export const HomeTabComponent = () => {
         name="Photos"
         component={Home}
         options={{
-          title: 'Photos',
+          title: i18n.t('photos_bottom_tab_bar_title'),
           tabBarIcon: PhotosIcon,
         }}
       />
@@ -31,7 +33,7 @@ export const HomeTabComponent = () => {
         name="Albums"
         component={Home}
         options={{
-          title: 'Albums',
+          title: i18n.t('albums_bottom_tab_bar_title'),
           tabBarIcon: AlbumsIcon,
         }}
       />
@@ -39,7 +41,7 @@ export const HomeTabComponent = () => {
         name="SharedAlbums"
         component={Home}
         options={{
-          title: 'Shared Albums',
+          title: i18n.t('shared_albums_bottom_tab_bar_title'),
           tabBarIcon: SharedAlbumsIcon,
         }}
       />
@@ -47,7 +49,7 @@ export const HomeTabComponent = () => {
         name="Search"
         component={Home}
         options={{
-          title: 'Search',
+          title: i18n.t('search_bottom_tab_bar_title'),
           tabBarIcon: SearchIcon,
         }}
       />
