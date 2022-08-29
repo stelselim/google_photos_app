@@ -39,7 +39,7 @@ interface TUseProvideAuthStates {
 
 const useProvideAuth = (): TAuthContextType => {
   const [authState, setAuthState] = useState<TUseProvideAuthStates>({
-    initiliazing: true,
+    initiliazing: false,
     user: null,
   });
 
@@ -57,6 +57,11 @@ const useProvideAuth = (): TAuthContextType => {
       setAuthState({
         initiliazing: false,
         user: user,
+      });
+    } else {
+      setAuthState({
+        initiliazing: false,
+        user: null,
       });
     }
   };

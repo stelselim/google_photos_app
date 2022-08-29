@@ -1,8 +1,8 @@
 import {ConfigureParams} from '@react-native-google-signin/google-signin';
 const scopes = [
-  'https://www.googleapis.com/auth/photoslibrary',
   'https://www.googleapis.com/auth/photoslibrary.readonly',
-  'https://www.googleapis.com/auth/photoslibrary.readonly.appcreateddata',
+  'https://www.googleapis.com/auth/photoslibrary.sharing',
+  'https://www.googleapis.com/auth/photoslibrary.appendonly',
 ];
 
 const configuration: ConfigureParams = {
