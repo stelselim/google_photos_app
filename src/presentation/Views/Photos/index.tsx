@@ -1,13 +1,5 @@
 import React, {useState} from 'react';
-import {
-  Button,
-  Dimensions,
-  FlatList,
-  Image,
-  ScrollView,
-  Text,
-  View,
-} from 'react-native';
+import {Button, FlatList, Image, Text, View} from 'react-native';
 import {IAlbum} from '../../../@types/albums.types';
 import {IMediaItemTypes} from '../../../@types/mediaItem.types';
 import {IPhotoMediaItemTypes} from '../../../@types/photoMediaItem.types';
@@ -31,7 +23,6 @@ const Photos = () => {
   const imageRequest = async () => {
     const data = await getLibraryContents();
 
-    console.log(data.contents[0]);
     if (data) {
       setContents(data.contents);
     }
@@ -43,16 +34,11 @@ const Photos = () => {
           includedContentCategories: ['GARDENS'],
         },
         dateFilter: {
-          dates: [
-            {
-              year: 2020,
-            },
-          ],
+          dates: [{year: 2022}],
         },
       },
     });
 
-    console.log(data);
     if (data) {
       setContents(data.contents);
     }
@@ -82,7 +68,6 @@ const Photos = () => {
       mediaId,
     });
     if (data) {
-      console.log(data);
       setPhotoMediaItem(data);
     }
   };
@@ -92,7 +77,6 @@ const Photos = () => {
       mediaId,
     });
     if (data) {
-      console.log(data);
       setVideoMediaItem(data);
     }
   };
@@ -133,7 +117,7 @@ const Photos = () => {
       <Button title="Get Albums" onPress={albumRequest} />
       <Button title="Get Library Contents Images" onPress={imageRequest} />
       <Button title="Search Images" onPress={searchRequest} />
-      <View style={{height: 150, backgroundColor: 'aqua'}}>
+      <View style={{backgroundColor: 'aqua'}}>
         <Text> Albums</Text>
         <FlatList
           style={{marginTop: 25}}
@@ -169,7 +153,7 @@ const Photos = () => {
         />
       </View>
 
-      <View style={{height: 150, marginTop: 15, backgroundColor: 'aqua'}}>
+      <View style={{marginTop: 15, backgroundColor: 'aqua'}}>
         <Text> Images</Text>
 
         <FlatList

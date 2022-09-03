@@ -40,6 +40,10 @@
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-PhotoApp-PhotoAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PhotoApp-PhotoAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B4392A12AC88292D35C810B /* Pods-PhotoApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoApp.debug.xcconfig"; path = "Target Support Files/Pods-PhotoApp/Pods-PhotoApp.debug.xcconfig"; sourceTree = "<group>"; };
 		423DB6DA28885970007DEB32 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "PhotoApp/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		42C269B228BA644F00EF0DB3 /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialIcons.ttf; sourceTree = "<group>"; };
+		42C269B428BA644F00EF0DB3 /* Foundation.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Foundation.ttf; sourceTree = "<group>"; };
+		42C269B528BA644F00EF0DB3 /* AntDesign.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AntDesign.ttf; sourceTree = "<group>"; };
+		42C269B728BA644F00EF0DB3 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-PhotoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoApp.release.xcconfig"; path = "Target Support Files/Pods-PhotoApp/Pods-PhotoApp.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-PhotoApp-PhotoAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoApp-PhotoAppTests.debug.xcconfig"; path = "Target Support Files/Pods-PhotoApp-PhotoAppTests/Pods-PhotoApp-PhotoAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-PhotoApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PhotoApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,6 +92,7 @@
 		13B07FAE1A68108700A75B9A /* PhotoApp */ = {
 			isa = PBXGroup;
 			children = (
+				42C269B128BA640000EF0DB3 /* Fonts */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -107,6 +112,17 @@
 				19F6CBCC0A4E27FBF8BF4A61 /* libPods-PhotoApp-PhotoAppTests.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		42C269B128BA640000EF0DB3 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				42C269B528BA644F00EF0DB3 /* AntDesign.ttf */,
+				42C269B728BA644F00EF0DB3 /* FontAwesome.ttf */,
+				42C269B428BA644F00EF0DB3 /* Foundation.ttf */,
+				42C269B228BA644F00EF0DB3 /* MaterialIcons.ttf */,
+			);
+			name = Fonts;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {

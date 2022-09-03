@@ -1,0 +1,9 @@
+{
+    "login_screen_app_bar_title": "Login",
+    "login_screen_continue_title":"Please sign in your Google account to your see photos.",
+    "photos_bottom_tab_bar_title": "Photos",
+    "albums_bottom_tab_bar_title": "Albums",
+    "shared_albums_bottom_tab_bar_title": "Shared Albums",
+    "search_bottom_tab_bar_title": "Search",
+    "sign_out_button_title": "Log Out"
+}
