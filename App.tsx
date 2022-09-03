@@ -1,15 +1,22 @@
+
 import React from 'react';
-import {AuthProvider} from './src/hooks/useAuth';
-import {AppServicesProvider} from './src/hooks/useServices';
-import AppNav from './src/presentation/core/AppNav';
+import { AuthProvider } from './src/hooks/useAuth';
+import { AppServicesProvider } from './src/hooks/useServices';
+import AppNav from './src/presentation/views/AppNav';
+import { NativeBaseProvider } from 'native-base';
+import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 
 const App = () => {
   return (
-    <AppServicesProvider>
-      <AuthProvider>
-        <AppNav />
-      </AuthProvider>
-    </AppServicesProvider>
+    <AuthProvider>
+      <AppServicesProvider>
+        <NativeBaseProvider>
+          <BottomSheetModalProvider>
+            <AppNav />
+          </BottomSheetModalProvider>
+        </NativeBaseProvider>
+      </AppServicesProvider>
+    </AuthProvider>
   );
 };
 

@@ -1,26 +1,18 @@
 import React from 'react';
 import {
   GoogleSigninButton,
-  User,
 } from '@react-native-google-signin/google-signin';
-import {authentication} from './../../../services/googleOauth';
-import {StyleSheet, View} from 'react-native';
-import {useAuth} from '../../../hooks/useAuth';
+import { useAuth } from '../../../hooks/useAuth';
+import { Dimensions } from 'react-native';
 
 const SignInButton = () => {
-  const {signIn} = useAuth();
+  const { signIn } = useAuth();
+  const {width} = Dimensions.get("screen");
 
   return (
-    <View style={styles.container}>
-      <GoogleSigninButton onPress={signIn} />
-    </View>
+    <GoogleSigninButton style={{ width: width * 0.5 }} onPress={signIn} />
   );
 };
 
-export {SignInButton};
+export { SignInButton };
 
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-  },
-});
