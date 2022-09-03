@@ -1,199 +1,91 @@
-import React, {useState} from 'react';
-import {Button, FlatList, Image, Text, View} from 'react-native';
-import {IAlbum} from '../../../@types/albums.types';
-import {IMediaItemTypes} from '../../../@types/mediaItem.types';
-import {IPhotoMediaItemTypes} from '../../../@types/photoMediaItem.types';
-import {IVideoMediaItemTypes} from '../../../@types/videoMediaItem.types';
-import {
-  getAlbums,
-  getAlbumsContent,
-  getLibraryContents,
-  getPhotoMediaItem,
-  getSharedAlbums,
-  getVideoMediaItem,
-  searchMediaItems,
-} from '../../../client/photos';
+import { FlatList, View } from 'native-base';
+import React, { useCallback, useEffect, useState } from 'react';
+import { Dimensions } from 'react-native';
+import { PinchGestureHandler } from 'react-native-gesture-handler';
+import { IMediaItemTypes } from '../../../@types/mediaItem.types';
+import { getLibraryContents } from '../../../client/photos';
+import { useAppDispatch, useAppSelector } from '../../../hooks/useAppSelector';
+import { addContents } from '../../../store/libraryContentReducers';
+import { onPinchHandlerStateChange } from '../../../utils/onPichHandleState';
+import { MediaItem } from '../../components/MediaItem';
+
 
 const Photos = () => {
-  const [albums, setAlbums] = useState<Array<IAlbum>>([]);
-  const [contents, setContents] = useState<Array<IMediaItemTypes>>([]);
-  const [photoMediaItem, setPhotoMediaItem] = useState<IPhotoMediaItemTypes>();
-  const [videoMediaItem, setVideoMediaItem] = useState<IVideoMediaItemTypes>();
+  let nextPageToken: string | undefined;
 
-  const imageRequest = async () => {
-    const data = await getLibraryContents();
+  const width = Dimensions.get("screen").width;
+  const [numColumns, setColumns] = useState(3);
+  const size = (width * 0.92) / numColumns;
 
-    if (data) {
-      setContents(data.contents);
-    }
-  };
-  const searchRequest = async () => {
-    const data = await searchMediaItems({
-      filters: {
-        contentFilter: {
-          includedContentCategories: ['GARDENS'],
-        },
-        dateFilter: {
-          dates: [{year: 2022}],
-        },
-      },
-    });
+  const contents = useAppSelector((state) => state.libraryContents.contents);
+  const dispatch = useAppDispatch();
 
-    if (data) {
-      setContents(data.contents);
+  const getImages = useCallback(async () => {
+    const res = await getLibraryContents();
+    if (res.contents.length > 0) {
+      nextPageToken = res.nextPageToken;
+      dispatch(addContents(res.contents));
     }
-  };
-  const albumRequest = async () => {
-    const data = await getAlbums();
-    if (data) {
-      setAlbums(data.albums);
-    }
-  };
-  const sharedAlbumRequest = async () => {
-    const data = await getSharedAlbums();
-    if (data) {
-      setAlbums(data.albums);
-    }
-  };
+  }, []);
 
-  const albumsContentRequest = async (albumId: string) => {
-    const data = await getAlbumsContent({
-      albumId,
-    });
-    setContents(data.contents);
-  };
-
-  const photoMediaItemRequest = async (mediaId: string) => {
-    const data = await getPhotoMediaItem({
-      mediaId,
-    });
-    if (data) {
-      setPhotoMediaItem(data);
+  const fetchMore = useCallback(async () => {
+    if (nextPageToken) {
+      const res = await getLibraryContents({
+        pageToken: nextPageToken,
+      });
+      if (res.contents.length > 0) {
+        nextPageToken = res.nextPageToken;
+        dispatch(addContents(res.contents));
+      }
     }
-  };
 
-  const videoMediaItemRequest = async (mediaId: string) => {
-    const data = await getVideoMediaItem({
-      mediaId,
-    });
-    if (data) {
-      setVideoMediaItem(data);
-    }
-  };
+  }, []);
 
-  const mediaItemRequest = (item: IMediaItemTypes) => {
-    if (item.mimeType.includes('video')) {
-      videoMediaItemRequest(item.id);
-    } else {
-      photoMediaItemRequest(item.id);
-    }
-  };
+  useEffect(() => {
+    getImages();
+  }, []);
+
+  //TODO: 
+  // Navigtate Media View for video or photo.
+  // Request media item data as PhotoMediaItem or VideoMediaItem
+  // Video: Play,mute, stop... download to gallery.
+  // Photo: Zoom, vs. download to gallery.
+  const mediaItemOnPressed = (item: IMediaItemTypes) => {
+    console.log(item.id);
+  }
+
+
+  const renderFlatListByNumColumns = (columns: 3 | 5) => {
+    return <FlatList
+      flex={1}
+      data={contents}
+      paddingTop="3"
+      paddingBottom="4"
+      onEndReachedThreshold={0.5}
+      onEndReached={fetchMore}
+      numColumns={columns}
+      renderItem={({ item }) => {
+        return <MediaItem onPressed={() => mediaItemOnPressed(item)} item={item} size={size} />
+      }} />
+  }
 
   return (
-    <View>
-      <Text>
-        {'id: ' + videoMediaItem?.id} {'\n'}
-        {'filename: ' + videoMediaItem?.filename} {'\n'}
-        {'displayName: ' + videoMediaItem?.contributorInfo?.displayName} {'\n'}
-        {'mimeType: ' + videoMediaItem?.mimeType} {'\n'}
-        {'fps: ' + videoMediaItem?.mediaMetadata.video.fps} {'\n'}
-        {'status: ' + videoMediaItem?.mediaMetadata.video.status} {'\n'}
-        {'camera make: ' + videoMediaItem?.mediaMetadata.video.cameraMake}
-        {'\n'}
-      </Text>
-
-      <Text>
-        {'id: ' + photoMediaItem?.id} {'\n'}
-        {'filename: ' + photoMediaItem?.filename} {'\n'}
-        {'displayName: ' + photoMediaItem?.contributorInfo?.displayName} {'\n'}
-        {'mimeType: ' + photoMediaItem?.mimeType} {'\n'}
-        {'cameraModel: ' + photoMediaItem?.mediaMetadata.photo.cameraModel}
-        {'\n'}
-        {'exposureTime: ' + photoMediaItem?.mediaMetadata.photo.exposureTime}
-        {'\n'}
-      </Text>
-
-      <Button title="Get Shared Albums" onPress={sharedAlbumRequest} />
-      <Button title="Get Albums" onPress={albumRequest} />
-      <Button title="Get Library Contents Images" onPress={imageRequest} />
-      <Button title="Search Images" onPress={searchRequest} />
-      <View style={{backgroundColor: 'aqua'}}>
-        <Text> Albums</Text>
-        <FlatList
-          style={{marginTop: 25}}
-          data={albums}
-          renderItem={element => {
-            return (
-              <View
-                style={{
-                  justifyContent: 'center',
-                  margin: 25,
-                  display: 'flex',
-                  flexDirection: 'row',
-                }}
-                key={element.item.id}>
-                <View style={{marginRight: 25, justifyContent: 'center'}}>
-                  <Text>Name: {element.item.title}</Text>
-                  <Text>Media Count: {element.item.mediaItemsCount}</Text>
-                  <Button
-                    title="get Photos"
-                    onPress={() => albumsContentRequest(element.item.id)}
-                  />
-                </View>
-                <Image
-                  style={{width: 160, height: 160}}
-                  source={{
-                    cache: 'force-cache',
-                    uri: element.item.coverPhotoBaseUrl,
-                  }}
-                />
-              </View>
-            );
-          }}
-        />
-      </View>
-
-      <View style={{marginTop: 15, backgroundColor: 'aqua'}}>
-        <Text> Images</Text>
-
-        <FlatList
-          style={{marginTop: 25}}
-          data={contents}
-          renderItem={element => {
-            return (
-              <View
-                style={{
-                  justifyContent: 'center',
-                  margin: 25,
-                  display: 'flex',
-                  flexDirection: 'row',
-                }}
-                key={element.item.id}>
-                <View style={{marginRight: 25, justifyContent: 'center'}}>
-                  <Text>Name: {element.item.filename}</Text>
-                  <Text>
-                    Size: {element.item.mediaMetadata.height}x
-                    {element.item.mediaMetadata.width}
-                  </Text>
-                  <Button
-                    title="get data"
-                    onPress={() => mediaItemRequest(element.item)}
-                  />
-                </View>
-                <Image
-                  style={{width: 160, height: 160}}
-                  source={{
-                    cache: 'force-cache',
-                    uri: element.item.baseUrl,
-                  }}
-                />
-              </View>
-            );
-          }}
-        />
-      </View>
+    <View flex={1} alignItems="center" backgroundColor={"lightBlue.50"} >
+      <PinchGestureHandler
+        onHandlerStateChange={(event) => onPinchHandlerStateChange(numColumns, event, setColumns)}>
+        <View>
+          {
+            numColumns === 3 ?
+              renderFlatListByNumColumns(3) : <></>
+          }
+          {
+            numColumns === 5 ?
+              renderFlatListByNumColumns(5) : <></>
+          }
+        </View>
+      </PinchGestureHandler>
     </View>
   );
 };
 
-export {Photos};
+export { Photos };
