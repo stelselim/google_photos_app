@@ -1,4 +1,4 @@
-export interface IFilterTypes {
+export type IFilterTypes = {
   contentFilter?: IContentFilterTypes;
   dateFilter?: IDateFilterTypes;
   featureFilter?: IFeatureFilterTypes;
@@ -8,7 +8,7 @@ export interface IFilterTypes {
 
 /// Content Filters
 /// max. 10 Categories can be filtered in single request.
-interface IContentFilterTypes {
+type IContentFilterTypes = {
   includedContentCategories?: Array<TCategoryTypes>;
   excludedContentCategories?: Array<TCategoryTypes>;
 }
@@ -42,34 +42,34 @@ type TCategoryTypes =
   | 'WHITEBOARDS';
 
 /// Date & Date Range Filters
-interface IDateFilterTypes {
+type IDateFilterTypes = {
   dates?: Array<IDateTypes>;
   ranges?: Array<IDateRangeTypes>;
 }
 
-interface IDateTypes {
+type IDateTypes = {
   day?: number;
   month?: number;
   year?: number;
 }
 
-interface IDateRangeTypes {
+type IDateRangeTypes = {
   startDate: IDateRangeDateTypes;
   endDate: IDateRangeDateTypes;
 }
 
-interface IDateRangeDateTypes {
+type IDateRangeDateTypes = {
   day: number;
   month: number;
   year: number;
 }
 
 /// Feature Filter Ex. Favorites
-interface IFeatureFilterTypes {
+type IFeatureFilterTypes = {
   includedFeatures: ['FAVORITES'];
 }
 
 // Media Types Filters
-interface IMediaTypeFilterTypes {
+type IMediaTypeFilterTypes = {
   mediaTypes: ['PHOTO'] | ['VIDEO'] | ['PHOTO', 'VIDEO'];
 }

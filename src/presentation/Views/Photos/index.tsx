@@ -7,15 +7,13 @@ import { getLibraryContents } from '../../../client/photos';
 import { useAppDispatch, useAppSelector } from '../../../hooks/useAppSelector';
 import { addContents } from '../../../store/libraryContentReducers';
 import { onPinchHandlerStateChange } from '../../../utils/onPichHandleState';
+import { GridViewFlatList } from '../../components/GridviewFlatList';
 import { MediaItem } from '../../components/MediaItem';
 
 
 const Photos = () => {
   let nextPageToken: string | undefined;
-
-  const width = Dimensions.get("screen").width;
   const [numColumns, setColumns] = useState(3);
-  const size = (width * 0.92) / numColumns;
 
   const contents = useAppSelector((state) => state.libraryContents.contents);
   const dispatch = useAppDispatch();
@@ -54,33 +52,28 @@ const Photos = () => {
     console.log(item.id);
   }
 
-
-  const renderFlatListByNumColumns = (columns: 3 | 5) => {
-    return <FlatList
-      flex={1}
-      data={contents}
-      paddingTop="3"
-      paddingBottom="4"
-      onEndReachedThreshold={0.5}
-      onEndReached={fetchMore}
-      numColumns={columns}
-      renderItem={({ item }) => {
-        return <MediaItem onPressed={() => mediaItemOnPressed(item)} item={item} size={size} />
-      }} />
-  }
-
   return (
     <View flex={1} alignItems="center" backgroundColor={"lightBlue.50"} >
       <PinchGestureHandler
         onHandlerStateChange={(event) => onPinchHandlerStateChange(numColumns, event, setColumns)}>
-        <View>
+        <View flex={1}>
           {
             numColumns === 3 ?
-              renderFlatListByNumColumns(3) : <></>
+              <GridViewFlatList
+                numColumns={numColumns}
+                data={contents}
+                fetchMore={fetchMore}
+                itemOnPressed={(item) => mediaItemOnPressed(item as IMediaItemTypes)}
+              /> : <View />
           }
           {
             numColumns === 5 ?
-              renderFlatListByNumColumns(5) : <></>
+              <GridViewFlatList
+                numColumns={numColumns}
+                data={contents}
+                fetchMore={fetchMore}
+                itemOnPressed={(item) => mediaItemOnPressed(item as IMediaItemTypes)}
+              /> : <View />
           }
         </View>
       </PinchGestureHandler>

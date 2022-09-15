@@ -1,4 +1,4 @@
-export interface IAlbum {
+export type IAlbum = {
   id: string;
   title: string;
   coverPhotoBaseUrl: string;
