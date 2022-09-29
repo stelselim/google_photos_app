@@ -1,4 +1,4 @@
-export interface IMediaItemTypes {
+export type IMediaItemTypes = {
   id: string;
   baseUrl: string;
   filename: string;
@@ -7,13 +7,13 @@ export interface IMediaItemTypes {
   productUrl: string;
 }
 
-export interface MediaMetadata {
+export type MediaMetadata = {
   creationTime: Date;
   height: string;
   photo: Photo;
   width: string;
 }
-export interface Photo {
+export type Photo = {
   apertureFNumber?: number;
   cameraMake?: string;
   cameraModel?: string;

@@ -21,7 +21,11 @@ export const albumsSlice = createSlice({
     initialState,
     reducers: {
         addAlbums: (state, action: PayloadAction<Array<IAlbum>>) => {
-            state.albums.push(...action.payload);
+            action.payload.forEach((element) => {
+                if (!state.albums.map(e => e.id).includes(element.id)) {
+                    state.albums.push(element);
+                }
+            })
         },
         removeAll: (state) => {
             state.albums = [];

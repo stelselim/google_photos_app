@@ -5,5 +5,6 @@
     "albums_bottom_tab_bar_title": "Albums",
     "shared_albums_bottom_tab_bar_title": "Shared Albums",
     "search_bottom_tab_bar_title": "Search",
-    "sign_out_button_title": "Log Out"
+    "sign_out_button_title": "Log Out",
+    "media_view_header_title":"Media"
 }

@@ -21,7 +21,11 @@ export const libraryContentSlice = createSlice({
     initialState,
     reducers: {
         addContents: (state, action: PayloadAction<Array<IMediaItemTypes>>) => {
-            state.contents.push(...action.payload);
+            action.payload.forEach((element) => {
+                if (!state.contents.map(e=>e.id).includes(element.id)) {
+                    state.contents.push(element);
+                }
+            })
         },
         removeAll: (state) => {
             state.contents = [];

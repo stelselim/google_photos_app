@@ -20,16 +20,20 @@ export const sharedAlbumsSlice = createSlice({
     name: 'sharedAlbums',
     initialState,
     reducers: {
-        addAlbums: (state, action: PayloadAction<Array<IAlbum>>) => {
-            state.albums.push(...action.payload);
+        addSharedAlbums: (state, action: PayloadAction<Array<IAlbum>>) => {
+            action.payload.forEach((element) => {
+                if (!state.albums.map(e => e.id).includes(element.id)) {
+                    state.albums.push(element);
+                }
+            })
         },
-        removeAll: (state) => {
+        removeSharedAlbumsAll: (state) => {
             state.albums = [];
         },
     },
 })
 
-export const { addAlbums, removeAll } = sharedAlbumsSlice.actions
+export const { addSharedAlbums, removeSharedAlbumsAll } = sharedAlbumsSlice.actions
 export const selectLibraryContents = (state: RootState) => state.sharedAlbums.albums
 
 export default sharedAlbumsSlice.reducer

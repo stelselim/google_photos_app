@@ -26,8 +26,10 @@ const signIn = async (): Promise<ISignInTypes['response']> => {
   try {
     await GoogleSignin.hasPlayServices();
     const userInfo = await GoogleSignin.signIn();
+    console.log(userInfo);
     return userInfo;
   } catch (error: any) {
+    console.log(error);
     if (error.code === statusCodes.SIGN_IN_CANCELLED) {
       return 'SIGN_IN_CANCELLED';
     } else if (error.code === statusCodes.IN_PROGRESS) {

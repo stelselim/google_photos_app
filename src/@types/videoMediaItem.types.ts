@@ -1,4 +1,4 @@
-export interface IVideoMediaItemTypes {
+export type IVideoMediaItemTypes = {
   id: string;
   description: string;
   productUrl: string;
@@ -9,21 +9,21 @@ export interface IVideoMediaItemTypes {
   contributorInfo?: ContributorInfo;
 }
 
-interface Video {
+type Video = {
   cameraMake?: string;
   cameraModel?: string;
   fps?: string;
   status: string;
 }
 
-interface MediaMetadata {
+type MediaMetadata = {
   width: string;
   height: string;
   creationTime: string;
   video: Video;
 }
 
-interface ContributorInfo {
+type ContributorInfo = {
   profilePictureBaseUrl?: string;
   displayName?: string;
 }
