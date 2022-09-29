@@ -1,4 +1,4 @@
-export interface IPhotoMediaItemTypes {
+export type IPhotoMediaItemTypes = {
   id: string;
   description: string;
   productUrl: string;
@@ -9,7 +9,7 @@ export interface IPhotoMediaItemTypes {
   contributorInfo?: ContributorInfo;
 }
 
-interface Photo {
+type Photo = {
   cameraMake?: string;
   cameraModel?: string;
   focalLength?: string;
@@ -18,14 +18,14 @@ interface Photo {
   exposureTime?: string;
 }
 
-interface MediaMetadata {
+type MediaMetadata = {
   width: string;
   height: string;
   creationTime: string;
   photo: Photo;
 }
 
-interface ContributorInfo {
+type ContributorInfo = {
   profilePictureBaseUrl?: string;
   displayName?: string;
 }
