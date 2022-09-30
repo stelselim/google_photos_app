@@ -23,6 +23,7 @@ import {SharedAlbums} from '../../SharedAlbums';
 import {Search} from '../../Search';
 import {ProfileAvatar} from '../../../components/ProfileAvatar';
 import {MediaView} from '../../MediaView';
+import {AlbumsContent} from '../../AlbumsContent';
 
 // Stacks
 const LoginStack = createNativeStackNavigator<TLoginStackParamList>();
@@ -69,6 +70,13 @@ const AlbumStackComponent = () => {
         }}
       />
       <AlbumsStack.Screen
+        name="AlbumsContent"
+        component={AlbumsContent}
+        options={{
+          headerRight: ProfileAvatar,
+        }}
+      />
+      <AlbumsStack.Screen
         name="MediaView"
         options={{
           title: i18n.t('media_view_header_title'),
@@ -88,6 +96,13 @@ const SharedAlbumsStackComponent = () => {
         options={{
           headerRight: ProfileAvatar,
           title: i18n.t('shared_albums_bottom_tab_bar_title'),
+        }}
+      />
+      <AlbumsStack.Screen
+        name="AlbumsContent"
+        component={AlbumsContent}
+        options={{
+          headerRight: ProfileAvatar,
         }}
       />
       <SharedAlbumsStack.Screen

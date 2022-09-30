@@ -1,7 +1,7 @@
 import {useNavigation} from '@react-navigation/native';
 import {View} from 'native-base';
 import Toast from 'react-native-toast-message';
-import React from 'react';
+import React, {useState} from 'react';
 import {Dimensions, Modal, StyleSheet} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import ImageViewer from 'react-native-image-zoom-viewer';
@@ -9,11 +9,11 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import {IPhotoMediaItemTypes} from '../../../../@types/photoMediaItem.types';
 import {savePicture} from '../../../../services/photoSave';
 import {getAspectRatio} from '../../../../utils/getAspectRatio';
+import {MediaItemInfoBottomSheet} from '../../../layouts/MediaItemInfoBottomSheet';
 
-//TODO:
-// Photo: Zoom,show details.
 const PhotoMediaItem = ({mediaItem}: {mediaItem: IPhotoMediaItemTypes}) => {
   const {width} = Dimensions.get('window');
+  const [infoSheet, setInfoSheet] = useState(false);
   const navigation = useNavigation();
 
   const aspectRatio = getAspectRatio(
@@ -29,9 +29,8 @@ const PhotoMediaItem = ({mediaItem}: {mediaItem: IPhotoMediaItemTypes}) => {
     });
   };
 
-  //TODO:
   const showInfo = () => {
-    console.log('Download');
+    setInfoSheet(true);
   };
 
   const renderFunctionalityButtons = () => {
@@ -71,6 +70,17 @@ const PhotoMediaItem = ({mediaItem}: {mediaItem: IPhotoMediaItemTypes}) => {
           }}
           imageUrls={[{url: mediaItem.baseUrl}]}
         />
+
+        {infoSheet && (
+          <MediaItemInfoBottomSheet
+            mediaItem={mediaItem}
+            onClose={() => {
+              setInfoSheet(false);
+            }}
+            size={'25%'}
+          />
+        )}
+
         <Toast />
         {renderFunctionalityButtons()}
       </Modal>

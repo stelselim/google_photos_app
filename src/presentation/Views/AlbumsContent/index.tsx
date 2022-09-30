@@ -1,45 +1,64 @@
-import {useNavigation} from '@react-navigation/native';
+import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {FlatList, View} from 'native-base';
 import React, {useCallback, useEffect, useState} from 'react';
 import {Dimensions} from 'react-native';
 import {PinchGestureHandler} from 'react-native-gesture-handler';
 import {IMediaItemTypes} from '../../../@types/mediaItem.types';
-import {TPhotoStackPhotosProps} from '../../../@types/navigation.types';
-import {getLibraryContents} from '../../../client/photos';
-import {useAppDispatch, useAppSelector} from '../../../hooks/useAppSelector';
-import {addContents} from '../../../store/libraryContentReducers';
+import {
+  IAlbumsStackParamList,
+  ISharedAlbumsStackParamList,
+  TAlbumsStackAlbumsContentViewProps,
+} from '../../../@types/navigation.types';
+import {getAlbumsContent} from '../../../client/photos';
 import {onPinchHandlerStateChange} from '../../../utils/onPichHandleState';
 import {MediaItem} from '../../components/MediaItem';
 import {primaryBackgroundColor} from '../../styles/colors';
 
-const Photos = () => {
+const AlbumsContent = () => {
+  const route =
+    useRoute<
+      RouteProp<
+        IAlbumsStackParamList | ISharedAlbumsStackParamList,
+        'AlbumsContent'
+      >
+    >();
+  const album = route.params.album;
   let nextPageToken: string | undefined;
 
   const width = Dimensions.get('screen').width;
   const [numColumns, setColumns] = useState(3);
   const size = (width * 0.92) / numColumns;
 
-  const contents = useAppSelector(state => state.libraryContents.contents);
-  const dispatch = useAppDispatch();
+  const [contents, setContents] = useState<IMediaItemTypes[]>([]);
 
-  const navigation = useNavigation<TPhotoStackPhotosProps>();
+  const navigation = useNavigation<TAlbumsStackAlbumsContentViewProps>();
 
   const getImages = useCallback(async () => {
-    const res = await getLibraryContents();
+    navigation.setOptions({
+      title: album.title,
+    });
+    const res = await getAlbumsContent({
+      albumId: album.id,
+    });
     if (res.contents.length > 0) {
       nextPageToken = res.nextPageToken;
-      dispatch(addContents(res.contents));
+      setContents([...contents, ...res.contents]);
     }
   }, []);
 
   const fetchMore = useCallback(async () => {
     if (nextPageToken) {
-      const res = await getLibraryContents({
+      const res = await getAlbumsContent({
+        albumId: album.id,
         pageToken: nextPageToken,
       });
       if (res.contents.length > 0) {
         nextPageToken = res.nextPageToken;
-        dispatch(addContents(res.contents));
+        for (const val of res.contents) {
+          if (!contents.map(e => e.id).includes(val.id)) {
+            setContents([...contents, val]);
+          }
+        }
       }
     }
   }, []);
@@ -92,4 +111,4 @@ const Photos = () => {
   );
 };
 
-export {Photos};
+export {AlbumsContent};

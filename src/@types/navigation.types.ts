@@ -1,4 +1,5 @@
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {IAlbum} from './albums.types';
 import {IMediaItemTypes} from './mediaItem.types';
 
 // Login Stack
@@ -16,12 +17,19 @@ export type TLoginRootStackProps = NativeStackNavigationProp<
 
 /*------------------------------------------------------*/
 
-/// Photo Stack
+// Screens
 export type TPhotosScreenParamsList = {};
 export type TMediaViewScreenParamsList = {
   mediaItem: IMediaItemTypes;
 };
+export type TAlbumsParamsList = {};
+export type TSharedAlbumsParamsList = {};
+export type TSearchParamsList = {};
+export type TAlbumsContentScreenParamsList = {
+  album: IAlbum;
+};
 
+/// Photo Stack
 export type IPhotosStackParamList = {
   Photos: TPhotosScreenParamsList;
   MediaView: TMediaViewScreenParamsList;
@@ -41,11 +49,10 @@ export type TPhotoStackMediaViewProps = NativeStackNavigationProp<
 /*------------------------------------------------------*/
 
 /// Albums Stack
-export type TAlbumsParamsList = {};
-
 export type IAlbumsStackParamList = {
   Albums: TAlbumsParamsList;
   MediaView: TMediaViewScreenParamsList;
+  AlbumsContent: TAlbumsContentScreenParamsList;
 };
 
 // Albums Stack Navigation Props
@@ -59,14 +66,18 @@ export type TAlbumsStackMediaViewProps = NativeStackNavigationProp<
   'MediaView'
 >;
 
+export type TAlbumsStackAlbumsContentViewProps = NativeStackNavigationProp<
+  IAlbumsStackParamList,
+  'AlbumsContent'
+>;
+
 /*------------------------------------------------------*/
 
 /// Shared Albums Stack
-export type TSharedAlbumsParamsList = {};
-
 export type ISharedAlbumsStackParamList = {
   SharedAlbums: TSharedAlbumsParamsList;
   MediaView: TMediaViewScreenParamsList;
+  AlbumsContent: TAlbumsContentScreenParamsList;
 };
 
 // Albums Stack Navigation Props
@@ -80,11 +91,14 @@ export type TSharedAlbumsStackMediaViewProps = NativeStackNavigationProp<
   'MediaView'
 >;
 
+export type TSharedAlbumsStackAlbumsContentProps = NativeStackNavigationProp<
+  ISharedAlbumsStackParamList,
+  'AlbumsContent'
+>;
+
 /*------------------------------------------------------*/
 
 // Search Stack
-export type TSearchParamsList = {};
-
 export type ISearchStackParamList = {
   Search: TSearchParamsList;
   MediaView: TMediaViewScreenParamsList;
