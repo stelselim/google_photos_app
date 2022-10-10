@@ -309,6 +309,18 @@ const getVideoMediaItem = async ({
   }
 };
 
+const getVideoMediaItemHeader = async () => {
+  const tokens = await getTokens();
+  if (tokens === null) {
+    return null;
+  }
+
+  return {
+    accept: 'video/*',
+    authorization: 'Bearer ' + tokens?.accessToken,
+  };
+};
+
 export {
   getAlbums,
   getSharedAlbums,
@@ -317,4 +329,5 @@ export {
   getAlbumsContent,
   getPhotoMediaItem,
   getVideoMediaItem,
+  getVideoMediaItemHeader,
 };

@@ -1,20 +1,22 @@
 import BottomSheet from '@gorhom/bottom-sheet';
+import 'intl';
+import 'intl/locale-data/jsonp/en'; // or any other locale you need
 import {Heading, HStack, Image, Spacer, Text, View, VStack} from 'native-base';
 import React, {useMemo, useRef} from 'react';
-import {IPhotoMediaItemTypes} from '../../../@types/photoMediaItem.types';
+import {Dimensions} from 'react-native';
+import {IVideoMediaItemTypes} from '../../../@types/videoMediaItem.types';
 
-interface IMediaItemInfoBottomSheetProps {
+interface IVideoMediaItemInfoBottomSheetProps {
   onClose: () => void;
-  mediaItem: IPhotoMediaItemTypes;
+  mediaItem: IVideoMediaItemTypes;
   size: '40%' | '25%';
 }
 
-const MediaItemInfoBottomSheet = ({
+const VideoMediaItemInfoBottomSheet = ({
   onClose,
   mediaItem,
   size,
-}: IMediaItemInfoBottomSheetProps) => {
-  // ref
+}: IVideoMediaItemInfoBottomSheetProps) => {
   const bottomSheetRef = useRef<BottomSheet>(null);
 
   // variables
@@ -53,12 +55,12 @@ const MediaItemInfoBottomSheet = ({
   };
 
   const renderPhotoMetadata = () => {
-    if (mediaItem.mediaMetadata.photo) {
+    if (mediaItem.mediaMetadata.video) {
       return (
         <VStack alignSelf="stretch" flex={1}>
-          {mediaItem.mediaMetadata.photo.cameraModel && (
+          {mediaItem.mediaMetadata.video.cameraModel && (
             <Heading size={'xs'}>
-              {mediaItem.mediaMetadata.photo.cameraModel}
+              {mediaItem.mediaMetadata.video.cameraModel}
             </Heading>
           )}
 
@@ -68,14 +70,9 @@ const MediaItemInfoBottomSheet = ({
                 'x' +
                 mediaItem.mediaMetadata.height}
             </Text>
-            {mediaItem.mediaMetadata.photo.apertureFNumber && (
+            {mediaItem.mediaMetadata.video.fps && (
               <Text fontSize={'sm'} marginRight={4}>
-                {'ƒ/' + mediaItem.mediaMetadata.photo.apertureFNumber}
-              </Text>
-            )}
-            {mediaItem.mediaMetadata.photo.exposureTime && (
-              <Text fontSize={'sm'}>
-                {'ISO' + mediaItem.mediaMetadata.photo.isoEquivalent}
+                {mediaItem.mediaMetadata.video.fps + ' fps'}
               </Text>
             )}
           </HStack>
@@ -94,7 +91,11 @@ const MediaItemInfoBottomSheet = ({
     }).format(new Date(mediaItem.mediaMetadata.creationTime));
 
     return (
-      <Text fontSize={'sm'} alignSelf={'flex-end'} fontWeight={'normal'}>
+      <Text
+        adjustsFontSizeToFit={true}
+        fontSize={'sm'}
+        alignSelf={'flex-end'}
+        fontWeight={'normal'}>
         {formattedDate}
       </Text>
     );
@@ -109,7 +110,9 @@ const MediaItemInfoBottomSheet = ({
       onClose={onClose}>
       <View flex={1} alignItems="flex-start" margin={2} marginLeft={4}>
         <HStack alignItems={'center'}>
-          <Heading size="sm">{mediaItem.filename} </Heading>
+          <Heading adjustsFontSizeToFit={true} size="sm">
+            {mediaItem.filename}
+          </Heading>
           <Spacer />
           {renderTime()}
         </HStack>
@@ -122,4 +125,4 @@ const MediaItemInfoBottomSheet = ({
   );
 };
 
-export {MediaItemInfoBottomSheet};
+export {VideoMediaItemInfoBottomSheet};

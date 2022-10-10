@@ -75,14 +75,7 @@ const MediaView = () => {
   } else {
     return (
       <View flex={1} alignItems="center" justifyContent={'center'}>
-        <ZStack alignItems="center" justifyContent="center">
-          <VideoMediaItem
-            mediaItem={extededMediaItem as IVideoMediaItemTypes}
-          />
-          <Center zIndex={3}>
-            <Heading>Play</Heading>
-          </Center>
-        </ZStack>
+        <VideoMediaItem mediaItem={extededMediaItem as IVideoMediaItemTypes} />
       </View>
     );
   }

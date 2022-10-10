@@ -2,14 +2,13 @@ import {useNavigation} from '@react-navigation/native';
 import {View} from 'native-base';
 import Toast from 'react-native-toast-message';
 import React, {useState} from 'react';
-import {Dimensions, Modal, StyleSheet} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import {Dimensions, Modal, StyleSheet, TouchableOpacity} from 'react-native';
 import ImageViewer from 'react-native-image-zoom-viewer';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {IPhotoMediaItemTypes} from '../../../../@types/photoMediaItem.types';
 import {savePicture} from '../../../../services/photoSave';
 import {getAspectRatio} from '../../../../utils/getAspectRatio';
-import {MediaItemInfoBottomSheet} from '../../../layouts/MediaItemInfoBottomSheet';
+import {PhotoMediaItemInfoBottomSheet} from '../../../layouts/PhotoMediaItemInfoBottomSheet';
 
 const PhotoMediaItem = ({mediaItem}: {mediaItem: IPhotoMediaItemTypes}) => {
   const {width} = Dimensions.get('window');
@@ -72,7 +71,7 @@ const PhotoMediaItem = ({mediaItem}: {mediaItem: IPhotoMediaItemTypes}) => {
         />
 
         {infoSheet && (
-          <MediaItemInfoBottomSheet
+          <PhotoMediaItemInfoBottomSheet
             mediaItem={mediaItem}
             onClose={() => {
               setInfoSheet(false);
