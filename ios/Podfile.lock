@@ -316,7 +316,7 @@ PODS:
   - React-jsinspector (0.70.1)
   - React-logger (0.70.1):
     - glog
-  - react-native-cameraroll (5.0.2):
+  - react-native-cameraroll (5.0.4):
     - React-Core
   - react-native-safe-area-context (3.3.2):
     - React-Core
@@ -664,7 +664,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 47201924064085223b63ec7e3ee9fd40ad8508e8
   React-jsinspector: 1363be638eccfe1aea1b10dd42e632b0397e5ec8
   React-logger: 7bd569e3857d74ed412ce0a5c51f421ff7d4ca7f
-  react-native-cameraroll: 4d0cb1c3413d4b7b85beb68a8c14325d887b404c
+  react-native-cameraroll: 38b40d9033e4077b6c603f92f95c6d05fa7907df
   react-native-safe-area-context: 584dc04881deb49474363f3be89e4ca0e854c057
   react-native-video: c26780b224543c62d5e1b2a7244a5cd1b50e8253
   React-perflogger: 48c6b363e867d64b682e84f80ca45636bd65e19c
