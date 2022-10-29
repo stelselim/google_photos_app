@@ -1,7 +1,12 @@
 import {useNavigation} from '@react-navigation/native';
 import {Center, Image, View, ZStack} from 'native-base';
 import React, {useEffect, useRef, useState} from 'react';
-import {Dimensions, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  Dimensions,
+  StyleSheet,
+  TouchableOpacity,
+  useWindowDimensions,
+} from 'react-native';
 import RNFS from 'react-native-fs';
 import Video from 'react-native-video';
 import {TPhotoStackMediaViewProps} from '../../../../@types/navigation.types';
@@ -15,7 +20,7 @@ import {Toast} from 'react-native-toast-message/lib/src/Toast';
 import {VideoMediaItemInfoBottomSheet} from '../../../layouts/VideoMediaItemInfoBottomSheet';
 
 const VideoMediaItem = ({mediaItem}: {mediaItem: IVideoMediaItemTypes}) => {
-  const {width} = Dimensions.get('window');
+  const {width} = useWindowDimensions();
   const videoFileName = getVideoFileName(mediaItem);
   const navigation = useNavigation<TPhotoStackMediaViewProps>();
 

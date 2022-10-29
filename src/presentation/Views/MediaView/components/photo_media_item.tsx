@@ -2,7 +2,13 @@ import {useNavigation} from '@react-navigation/native';
 import {View} from 'native-base';
 import Toast from 'react-native-toast-message';
 import React, {useState} from 'react';
-import {Dimensions, Modal, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  Dimensions,
+  Modal,
+  StyleSheet,
+  TouchableOpacity,
+  useWindowDimensions,
+} from 'react-native';
 import ImageViewer from 'react-native-image-zoom-viewer';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {IPhotoMediaItemTypes} from '../../../../@types/photoMediaItem.types';
@@ -11,7 +17,7 @@ import {getAspectRatio} from '../../../../utils/getAspectRatio';
 import {PhotoMediaItemInfoBottomSheet} from '../../../layouts/PhotoMediaItemInfoBottomSheet';
 
 const PhotoMediaItem = ({mediaItem}: {mediaItem: IPhotoMediaItemTypes}) => {
-  const {width} = Dimensions.get('window');
+  const {width} = useWindowDimensions();
   const [infoSheet, setInfoSheet] = useState(false);
   const navigation = useNavigation();
 

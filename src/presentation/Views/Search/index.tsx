@@ -1,7 +1,7 @@
 import {useNavigation} from '@react-navigation/native';
 import {Button, FlatList, View, VStack} from 'native-base';
 import React, {useCallback, useEffect, useState} from 'react';
-import {Dimensions} from 'react-native';
+import {Dimensions, useWindowDimensions} from 'react-native';
 import {Toast} from 'react-native-toast-message/lib/src/Toast';
 
 import {
@@ -19,7 +19,7 @@ import {primaryBackgroundColor} from '../../styles/colors';
 
 const Search = () => {
   let nextPageToken: string | undefined;
-  const {width, height} = Dimensions.get('screen');
+  const {width, height} = useWindowDimensions();
   const size = (width * 0.92) / 3;
 
   const navigation = useNavigation<TSearchStackSeachProps>();
@@ -67,14 +67,13 @@ const Search = () => {
 
   const renderList = () => {
     return (
-      <FlatList
+      <FlatList<TCategoryTypes>
         marginY="2.5"
         paddingX="2.5"
         horizontal={true}
         data={searchCategoryTypes}
         renderItem={({item}) => {
-          const categoryType = item as TCategoryTypes;
-          return renderItem(categoryType);
+          return renderItem(item);
         }}
       />
     );
@@ -134,14 +133,14 @@ const Search = () => {
             <CircularLoader />
           </View>
         ) : (
-          <FlatList
+          <FlatList<IMediaItemTypes>
             data={contents}
             numColumns={3}
             flex={1}
             paddingBottom="4"
             onEndReachedThreshold={0.5}
             onEndReached={fetchMore}
-            renderItem={({item, index}) => {
+            renderItem={({item}) => {
               return (
                 <MediaItem
                   onPressed={() => mediaItemOnPressed(item)}

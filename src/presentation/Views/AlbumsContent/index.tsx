@@ -75,7 +75,7 @@ const AlbumsContent = () => {
 
   const renderFlatListByNumColumns = (columns: 3 | 5) => {
     return (
-      <FlatList
+      <FlatList<IMediaItemTypes>
         flex={1}
         data={contents}
         paddingTop="3"

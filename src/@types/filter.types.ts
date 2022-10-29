@@ -1,4 +1,4 @@
-export const searchCategoryTypes: string[] = [
+export const searchCategoryTypes = [
   'ANIMALS',
   'ARTS',
   'BIRTHDAYS',
@@ -25,7 +25,7 @@ export const searchCategoryTypes: string[] = [
   'UTILITY',
   'WEDDINGS',
   'WHITEBOARDS',
-];
+] as const;
 
 export type IFilterTypes = {
   contentFilter?: IContentFilterTypes;

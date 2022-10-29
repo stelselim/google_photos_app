@@ -48,7 +48,7 @@ const GridViewFlatList = ({
   };
 
   return (
-    <FlatList
+    <FlatList<IMediaItemTypes | IAlbum>
       flex={1}
       data={data}
       paddingTop="3"

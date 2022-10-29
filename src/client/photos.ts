@@ -5,6 +5,13 @@ import {IMediaItemTypes} from '../@types/mediaItem.types';
 import {IPhotoMediaItemTypes} from '../@types/photoMediaItem.types';
 import {IVideoMediaItemTypes} from '../@types/videoMediaItem.types';
 import {IFilterTypes} from '../@types/filter.types';
+import {
+  TGetAlbumsResponseTypes,
+  TGetAlbumsSearchTypes,
+  TGetMediaItemsResponseTypes,
+  TGetSharedAlbumsResponseTypes,
+  TPostMediaItemSearchTypes,
+} from './photos.types';
 
 /**
  * Gets albums of user.
@@ -30,7 +37,7 @@ const getAlbums = async ({
       };
     }
     const client = await photoClient(tokens.accessToken);
-    const res = await client.get('/albums', {
+    const res = await client.get<TGetAlbumsResponseTypes>('/albums', {
       params: {
         pageSize: pageSize,
         pageToken: pageToken,
@@ -76,12 +83,15 @@ const getSharedAlbums = async ({
       };
     }
     const client = await photoClient(tokens.accessToken);
-    const res = await client.get('/sharedAlbums', {
-      params: {
-        pageSize: pageSize,
-        pageToken: pageToken,
+    const res = await client.get<TGetSharedAlbumsResponseTypes>(
+      '/sharedAlbums',
+      {
+        params: {
+          pageSize: pageSize,
+          pageToken: pageToken,
+        },
       },
-    });
+    );
     if (res.data.sharedAlbums) {
       return {
         albums: res.data.sharedAlbums,
@@ -126,7 +136,7 @@ const getLibraryContents = async ({
       };
     }
     const client = await photoClient(tokens.accessToken);
-    const res = await client.get('/mediaItems', {
+    const res = await client.get<TGetMediaItemsResponseTypes>('/mediaItems', {
       params: {
         pageSize: pageSize,
         pageToken: pageToken,
@@ -179,11 +189,14 @@ const searchMediaItems = async ({
     }
     const client = await photoClient(tokens.accessToken);
 
-    const res = await client.post('/mediaItems:search', {
-      pageSize: pageSize,
-      pageToken: pageToken,
-      filters: filters,
-    });
+    const res = await client.post<TPostMediaItemSearchTypes>(
+      '/mediaItems:search',
+      {
+        pageSize: pageSize,
+        pageToken: pageToken,
+        filters: filters,
+      },
+    );
     if (res.data.mediaItems) {
       return {
         contents: res.data.mediaItems,
@@ -230,7 +243,7 @@ const getAlbumsContent = async ({
       };
     }
     const client = await photoClient(tokens.accessToken);
-    const res = await client.post('/mediaItems:search', {
+    const res = await client.post<TGetAlbumsSearchTypes>('/mediaItems:search', {
       albumId: albumId,
       pageSize: pageSize,
       pageToken: pageToken,
