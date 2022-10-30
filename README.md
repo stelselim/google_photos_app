@@ -36,11 +36,6 @@ While authenticating with Google, the app requests three different permissions.
 
 <br/>
 
-## TypeScript - Types
-## Localizations - Multiple Language Support
-## Redux - Redux tool kit
-## Hooks 
-
 
 ## Setup 
 Create OAuth 2.0 Client IDs on [Google Cloud API Credentials](https://console.cloud.google.com/apis/credentials) for both iOS & Android. Add these files to proper paths of the project. 
@@ -69,11 +64,16 @@ npm run android
 
 Contributions, issues and feature requests are welcome! Feel free to check [issues page](https://github.com/stelselim/google_photos_app/issues).
 
-
-
-
 <br/>
-<br/>
+
+## Authors
+
+👤 **Selim Ustel**
+
+- GitHub: [@stelselim](https://github.com/stelselim)
+- LinkedIn: [@selimustel](https://www.linkedin.com/in/selimustel/)
+
+
 <br/>
 <br/>
 
@@ -117,11 +117,3 @@ Contributions, issues and feature requests are welcome! Feel free to check [issu
 <br/>
 <br/>
 
-## Authors
-
-👤 **Selim Ustel**
-
-- GitHub: [@stelselim](https://github.com/stelselim)
-- LinkedIn: [@selimustel](https://www.linkedin.com/in/selimustel/)
-
-<br/>
